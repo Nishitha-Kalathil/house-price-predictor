@@ -1,0 +1,318 @@
+{% block body %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>House price prediction</title>
+
+        <!-- CSS FILES -->        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+                        
+        <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+         
+
+        <link href="{{url_for('static', filename='css/bootstrap-icons.css')}}" rel="stylesheet">
+
+        <link href="{{url_for('static', filename='css/templatemo-topic-listing.css')}}" rel="stylesheet">      
+
+    </head>
+    
+    <body id="top">
+
+        <main>
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="">
+                        <i class="bi-back"></i>
+                        <span>PriceWise</span>
+                    </a>      
+                </div>
+            </nav>
+            
+
+            <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-12 mx-auto">
+                            <h1 class="text-white text-center">Welcome to PriceWise</h1>
+
+                            <h6 class="text-center">This is an advanced app designed to help you predict the prices of houses with accuracy and confidence. Whether you're a real estate investor, a homeowner planning to sell, or simply curious about the value of a property, our app provides you with powerful insights and data-driven predictions.</h6>
+                           
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="featured-section">
+                <div class="container">
+                    <div class="row justify-content-center">                       
+
+                        <div class="col-lg-9 ">
+                            <div class="custom-block custom-block-overlay">
+                                <div class="d-flex flex-column h-100">
+                                    <div class="custom-block-overlay-text ">
+                                        <div class="form-container">
+                                            
+                                            <form action="{{ url_for('predict') }}" method="post">
+                                                <div class="row g-2">
+                                                <h5 class="text-white mb-2">Give your preferences...</h5>
+                                            </div><br>
+                                                <div class="row g-2">                                                                                                        
+                                                    <div class="col-md-4">
+                                                        <label for="area"><b>Area:</b></label>
+                                                        <input type="number" name="Area" style="width:150px;" required><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="bedrooms"><b>Bedrooms:</b></label>
+                                                        <input type="number" name="No_of_Bedrooms" style="width: 140px;" required><br><br>
+                                                    </div>
+                                                    
+                                                    
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col-md-4">
+                                                        <label for="gymnasium"><b>Gymnasium:</b></label>                                                        
+                                                        <input type="radio" id="gymnasium_no" name="Gymnasium" value="0" required> 
+                                                        <label for="gymnasium_no">No</label>
+                                                        <input type="radio" id="gymnasium_yes"name="Gymnasium" value="1"> 
+                                                        <label for="gymnasium_yes">Yes</label>                                                        
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="swimming_pool"><b>Swimming Pool:</b></label>
+                                                        <input type="radio" id="swimming_pool_no" name="SwimmingPool" value="0" required>
+                                                        <label for="swimming_pool_no">No</label>
+                                                        <input type="radio" id="swimming_pool_yes" name="SwimmingPool" value="1">
+                                                        <label for="swimming_pool_yes">Yes</label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="landscaped_gardens"><b>Landscaped Gardens:</b></label>
+                                                        <input type="radio" id="landscaped_gardens_no" name="LandscapedGardens" value="0" required>
+                                                        <label for="landscaped_gardens_no">No</label>
+                                                        <input type="radio" id="landscaped_gardens_yes" name="LandscapedGardens" value="1">
+                                                        <label for="landscaped_gardens_yes">Yes</label>
+                                                    </div>
+                                                                                      
+                                                </div><br>
+                                                <div class="row g-2">
+                                                    <div class="col-md-4">
+                                                        <label for="atm"><b>ATM:</b></label>
+                                                        <input type="radio" id="atm_no" name="ATM" value="0" required>
+                                                        <label for="atm_no">No</label>
+                                                        <input type="radio" id="atm_yes" name="ATM" value="1">
+                                                        <label for="atm_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="shopping_mall"><b>Shopping Mall:</b></label>
+                                                        <input type="radio" id="shopping_mall_no" name="ShoppingMall" value="0" required>
+                                                        <label for="shopping_mall_no">No</label>
+                                                        <input type="radio" id="shopping_mall_yes" name="ShoppingMall" value="1">
+                                                        <label for="shopping_mall_yes">Yes</label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="Resale"><b>Resale value:</b></label>
+                                                        <label for="resale_no">No</label>
+                                                        <input id = "resale_no" type="radio" name="Resale" value="0" required>
+                                                        <label for="resale_yes">Yes</label>
+                                                        <input id = "resale_yes" type="radio" name="Resale" value="1"> 
+                                                    </div>
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col-md-4">
+                                                        <label for="school"><b>School:</b></label>
+                                                        <input type="radio" id="school_no" name="School" value="0" required>
+                                                        <label for="school_no">No</label>
+                                                        <input type="radio" id="school_yes" name="School" value="1">
+                                                        <label for="school_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="security_24x7"><b>24x7 Security:</b></label>
+                                                        <input type="radio" id="security_24x7_no" name="24X7Security" value="0" required>
+                                                        <label for="security_24x7_no">No</label>
+                                                        <input type="radio" id="security_24x7_yes" name="24X7Security" value="1">
+                                                        <label for="security_24x7_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="power_backup"><b>Power Backup:</b></label>
+                                                        <input type="radio" id="power_backup_no" name="PowerBackup" value="0" required>
+                                                        <label for="power_backup_no">No</label>
+                                                        <input type="radio" id="power_backup_yes" name="PowerBackup" value="1">
+                                                        <label for="power_backup_yes">Yes</label><br><br>
+                                                    </div>
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col-md-4">
+                                                        <label for="car_parking"><b>Car Parking:</b></label>
+                                                        <input type="radio" id="car_parking_no" name="CarParking" value="0" required>
+                                                        <label for="car_parking_no">No</label>
+                                                        <input type="radio" id="car_parking_yes" name="CarParking" value="1">
+                                                        <label for="car_parking_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="hospital"><b>Hospital:</b></label>
+                                                        <input type="radio" id="hospital_no" name="Hospital" value="0" required>
+                                                        <label for="hospital_no">No</label>
+                                                        <input type="radio" id="hospital_yes" name="Hospital" value="1">
+                                                        <label for="hospital_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="washing_machine"><b>Washing Machine:</b></label>
+                                                        <input type="radio" id="washing_machine_no" name="WashingMachine" value="0" required>
+                                                        <label for="washing_machine_no">No</label>
+                                                        <input type="radio" id="washing_machine_yes" name="WashingMachine" value="1">
+                                                        <label for="washing_machine_yes">Yes</label><br><br>
+                                                    </div>
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col-md-4">
+                                                        <label for="gas_connection"><b>Gas Connection:</b></label>
+                                                        <input type="radio" id="gas_connection_no" name="Gasconnection" value="0" required>
+                                                        <label for="gas_connection_no">No</label>
+                                                        <input type="radio" id="gas_connection_yes" name="Gasconnection" value="1">
+                                                        <label for="gas_connection_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="ac"><b>AC:</b></label>
+                                                        <input type="radio" id="ac_no" name="AC" value="0" required>
+                                                        <label for="ac_no">No</label>
+                                                        <input type="radio" id="ac_yes" name="AC" value="1">
+                                                        <label for="ac_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="wifi"><b>WiFi:</b></label>
+                                                        <input type="radio" id="wifi_no" name="Wifi" value="0" required>
+                                                        <label for="wifi_no">No</label>
+                                                        <input type="radio" id="wifi_yes" name="Wifi" value="1">
+                                                        <label for="wifi_yes">Yes</label><br><br>
+                                                    </div>
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col-md-4">
+                                                        <label for="lift_available"><b>Lift Available:</b></label>
+                                                        <input type="radio" id="lift_available_no" name="LiftAvailable" value="0" required>
+                                                        <label for="lift_available_no">No</label>
+                                                        <input type="radio" id="lift_available_yes" name="LiftAvailable" value="1">
+                                                        <label for="lift_available_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="bed"><b>Bed:</b></label>
+                                                        <input type="radio" id="bed_no" name="BED" value="0" required>
+                                                        <label for="bed_no">No</label>
+                                                        <input type="radio" id="bed_yes" name="BED" value="1">
+                                                        <label for="bed_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="children_playarea"><b>Children's Play Area:</b></label>
+                                                        <input type="radio" id="children_playarea_no" name="Children_playarea" value="0" required>
+                                                        <label for="children_playarea_no">No</label>
+                                                        <input type="radio" id="children_playarea_yes" name="Children_playarea" value="1">
+                                                        <label for="children_playarea_yes">Yes</label><br><br>                                                
+                                                    </div>
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col-md-4">
+                                                        <label for="microwave"><b>Microwave:</b></label>
+                                                        <input type="radio" id="microwave_no" name="Microwave" value="0" required>
+                                                        <label for="microwave_no">No</label>
+                                                        <input type="radio" id="microwave_yes" name="Microwave" value="1">
+                                                        <label for="microwave_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="tv"><b>TV:</b></label>
+                                                        <input type="radio" id="tv_no" name="TV" value="0" required>
+                                                        <label for="tv_no">No</label>
+                                                        <input type="radio" id="tv_yes" name="TV" value="1">
+                                                        <label for="tv_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="dining_table"><b>Dining Table:</b></label>
+                                                        <input type="radio" id="dining_table_no" name="DiningTable" value="0" required>
+                                                        <label for="dining_table_no">No</label>
+                                                        <input type="radio" id="dining_table_yes" name="DiningTable" value="1">
+                                                        <label for="dining_table_yes">Yes</label><br><br>
+                                                    </div>
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col-md-4">
+                                                        <label for="sofa"><b>Sofa:</b></label>
+                                                        <input type="radio" id="sofa_no" name="Sofa" value="0" required>
+                                                        <label for="sofa_no">No</label>
+                                                        <input type="radio" id="sofa_yes" name="Sofa" value="1">
+                                                        <label for="sofa_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="wardrobe"><b>Wardrobe:</b></label>
+                                                        <input type="radio" id="wardrobe_no" name="Wardrobe" value="0" required>
+                                                        <label for="wardrobe_no">No</label>
+                                                        <input type="radio" id="wardrobe_yes" name="Wardrobe" value="1">
+                                                        <label for="wardrobe_yes">Yes</label><br><br>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="refrigerator"><b>Refrigerator:</b></label>
+                                                        <input type="radio" id="refrigerator_no" name="Refrigerator" value="0" required>
+                                                        <label for="refrigerator_no">No</label>
+                                                        <input type="radio" id="refrigerator_yes" name="Refrigerator" value="1">
+                                                        <label for="refrigerator_yes">Yes</label><br><br>
+                                                    </div>
+                                                </div>
+                                                                                                <div class="row g-2">
+                                                    <button type="submit" class="custom-btn">Submit</button>
+                                                </div>
+                                                
+                                            </form>
+                                        </div>
+                                    </div>                              
+                                    <div class="section-overlay"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-2 mb-4 mb-lg-0">
+                            <div class="custom-block bg-white shadow-lg">
+                                
+                                    <div class="d-flex">
+                                        <div>
+                                            <br><br>
+                                            <h5 class="mb-2">And Here the Price....</h5>
+                                            <br><br><br><br>
+                                            {% if predicted_price %}
+                                            <div class="price">                                                
+                                                <h5 class="mb-2">Rs.{{ predicted_price|intcomma }}/-</h5>
+                                            </div>
+                                            {% endif %}
+                                            
+                                        </div>                                     
+                                    </div>
+                                    <img src="{{url_for('static', filename='images/topics/undraw_Remote_design_team_re_urdx.png')}}" class="custom-block-image img-fluid" alt="">
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>                   
+
+
+        
+        <!-- JAVASCRIPT FILES -->
+        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/jquery.sticky.js')}}"></script>
+        <script src="{{url_for('static', filename='js/click-scroll.js')}}"></script>
+        <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+
+    </body>
+</html>
+{% endblock %}
